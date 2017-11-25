@@ -28,6 +28,7 @@ namespace BattleInfoPlugin.Models.Raw
         public Api_Get_Eventitem[] api_get_eventitem { get; set; }
         public int api_get_exmap_rate { get; set; }
         public int api_get_exmap_useitem_id { get; set; }
+        public int api_mapcell_incentive { get; set; }
 
         public int? api_mvp_combined { get; set; }
         public int[] api_get_ship_exp_combined { get; set; }
@@ -35,6 +36,14 @@ namespace BattleInfoPlugin.Models.Raw
         public int api_get_eventflag { get; set; }
         public int api_escape_flag { get; set; }
         public Api_Escape api_escape { get; set; }
+        public Api_Landing_HP api_landing_hp { get; set; }
+    }
+
+    public class Api_Landing_HP
+    {
+        public string api_max_hp { get; set; }
+        public string api_now_hp { get; set; }
+        public int api_sub_value { get; set; }
     }
 
     public class Api_Enemy_Info

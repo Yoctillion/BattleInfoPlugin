@@ -11,10 +11,10 @@ namespace BattleInfoPlugin.Models.Raw
         int[] api_ship_ke_combined { get; set; }
         int[] api_ship_lv { get; set; }
         int[] api_ship_lv_combined { get; set; }
-        int[] api_nowhps { get; set; }
-        int[] api_maxhps { get; set; }
-        int[] api_nowhps_combined { get; set; }
-        int[] api_maxhps_combined { get; set; }
+        int[] api_f_nowhps { get; set; }
+        int[] api_f_maxhps { get; set; }
+        int[] api_f_nowhps_combined { get; set; }
+        int[] api_f_maxhps_combined { get; set; }
         int[][] api_eSlot { get; set; }
         int[][] api_eSlot_combined { get; set; }
         int[][] api_eKyouka { get; set; }
@@ -22,6 +22,10 @@ namespace BattleInfoPlugin.Models.Raw
         int[][] api_fParam_combined { get; set; }
         int[][] api_eParam { get; set; }
         int[][] api_eParam_combined { get; set; }
+        int[] api_e_nowhps { get; set; }
+        int[] api_e_maxhps { get; set; }
+        int[] api_e_nowhps_combined { get; set; }
+        int[] api_e_maxhps_combined { get; set; }
     }
 
     public static class CommonBattleMembersExtensions
@@ -42,11 +46,11 @@ namespace BattleInfoPlugin.Models.Raw
 
         public static MastersShipData[] GetEnemyFirstFleetData(this ICommonBattleMembers data)
         {
-            return data.api_ship_ke.GetSection(0)
+            return data.api_ship_ke
                 .ToMastersShipDataArray(
-                    data.api_ship_lv.GetSection(0).ToArray(),
-                    data.api_maxhps.GetEnemyData().ToArray(),
-                    data.api_nowhps.GetEnemyData().ToArray(),
+                    data.api_ship_lv.ToArray(),
+                    data.api_e_maxhps.ToArray(),
+                    data.api_e_nowhps.ToArray(),
                     data.api_eParam,
                     data.api_eSlot);
         }
@@ -56,8 +60,8 @@ namespace BattleInfoPlugin.Models.Raw
             return data.api_ship_ke_combined?.GetSection(0)
                 .ToMastersShipDataArray(
                     data.api_ship_lv_combined.GetSection(0).ToArray(),
-                    data.api_maxhps_combined.GetEnemyData().ToArray(),
-                    data.api_nowhps_combined.GetEnemyData().ToArray(),
+                    data.api_e_maxhps_combined.GetEnemyData().ToArray(),
+                    data.api_e_nowhps_combined.GetEnemyData().ToArray(),
                     data.api_eParam_combined,
                     data.api_eSlot_combined);
         }

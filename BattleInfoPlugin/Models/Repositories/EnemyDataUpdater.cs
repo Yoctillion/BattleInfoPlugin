@@ -97,8 +97,8 @@ namespace BattleInfoPlugin.Models.Repositories
                 data.api_eParam_combined,
                 data.api_ship_lv,
                 data.api_ship_lv_combined,
-                data.api_maxhps,
-                data.api_maxhps_combined);
+                data.api_e_maxhps,
+                data.api_e_maxhps_combined);
             this.UpdateBattleTypes(data);
         }
 
@@ -223,14 +223,14 @@ namespace BattleInfoPlugin.Models.Repositories
             int[][] api_eParam_combined,
             int[] api_ship_lv,
             int[] api_ship_lv_combined,
-            int[] api_maxhps,
-            int[] api_maxhps_combined)
+            int[] api_e_maxhps,
+            int[] api_e_maxhps_combined)
         {
             var formation = (Formation)api_formation[1];
             var enemies = api_ship_ke.Where(x => x != -1).Concat(api_ship_ke_combined.ValueOrEmpty()).ToArray();
             var lvs = api_ship_lv.Concat(api_ship_lv_combined.ValueOrEmpty()).ToArray();
-            var hps = api_maxhps.GetEnemyData()
-                .Concat(api_maxhps_combined != null ? spliter.Concat(api_maxhps_combined.GetEnemyData()) : new int[0])
+            var hps = api_e_maxhps.GetEnemyData()
+                .Concat(api_e_maxhps_combined != null ? spliter.Concat(api_e_maxhps_combined.GetEnemyData()) : new int[0])
                 .ToArray();
             var slots = api_eSlot.Concat(api_eSlot_combined.ValueOrEmpty()).ToArray();
             var param = api_eParam.Concat(api_eParam_combined.ValueOrEmpty()).ToArray();
@@ -271,7 +271,7 @@ namespace BattleInfoPlugin.Models.Repositories
             int[][] api_eKyouka,
             int[][] api_eParam,
             int[] api_ship_lv,
-            int[] api_maxhps,
+            int[] api_e_maxhps,
             out string id)
         {
             var keys = this.EnemyData.MapEnemyData.GetOrAddNew(mapInfoId).GetOrAddNew(cellIdInMapInfo).ToArray();
@@ -282,7 +282,7 @@ namespace BattleInfoPlugin.Models.Repositories
             keys = this.EnemyData.EnemyUpgraded.Filter(keys, api_eKyouka);
             keys = this.EnemyData.EnemyParams.Filter(keys, api_eParam);
             keys = this.EnemyData.EnemyLevels.Filter(keys, api_ship_lv);
-            keys = this.EnemyData.EnemyHPs.Filter(keys, api_maxhps);
+            keys = this.EnemyData.EnemyHPs.Filter(keys, api_e_maxhps);
             keys = this.EnemyData.EnemyRank.Filter(keys, rank);
 
             id = keys.Any() ? keys.First() : Guid.NewGuid().ToString();

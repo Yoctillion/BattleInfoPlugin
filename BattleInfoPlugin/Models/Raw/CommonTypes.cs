@@ -48,9 +48,9 @@
 
     public class Api_Stage3
     {
-        public int[] api_frai_flag { get; set; }
+        public int?[] api_frai_flag { get; set; }
         public int[] api_erai_flag { get; set; }
-        public int[] api_fbak_flag { get; set; }
+        public int?[] api_fbak_flag { get; set; }
         public int[] api_ebak_flag { get; set; }
         public int[] api_fcl_flag { get; set; }
         public int[] api_ecl_flag { get; set; }
@@ -107,6 +107,7 @@
 
     public class Hougeki
     {
+        public int[] api_at_eflag { get; set; }
         public int[] api_at_list { get; set; }
         public int[] api_at_type { get; set; }
         public object[] api_df_list { get; set; }
@@ -117,6 +118,7 @@
 
     public class Midnight_Hougeki
     {
+        public int[] api_at_eflag { get; set; }
         public int[] api_at_list { get; set; }
         public object[] api_df_list { get; set; }
         public object[] api_si_list { get; set; }
